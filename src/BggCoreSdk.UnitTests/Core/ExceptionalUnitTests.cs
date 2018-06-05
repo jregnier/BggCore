@@ -1,6 +1,6 @@
 using System;
-using Xunit;
 using BggCoreSdk.Core;
+using Xunit;
 
 namespace BggCoreSdk.UnitTests.Core
 {
@@ -84,6 +84,86 @@ namespace BggCoreSdk.UnitTests.Core
 
             // assert
             Assert.Equal(EXPECTED_RESULT, testResult);
+        }
+
+        [Fact]
+        public void Map_Throw_Exception_Null_Parameter()
+        {
+            // arrange
+            var testObject = Exceptional<string>.Success("my value");
+
+            // act, assert
+            var result = Assert.Throws<ArgumentNullException>(() => testObject.Map<string>(null));
+            Assert.Equal("function", result.ParamName);
+        }
+
+        [Fact]
+        public void Map_Success_Executes_Action()
+        {
+            // arrange
+            var testResult = string.Empty;
+            var testObject = Exceptional<int>.Success(10);
+
+            // act
+            var result = testObject.Map(x => x.ToString());
+
+            // assert
+            Assert.IsType<string>(result.Value);
+        }
+
+        [Fact]
+        public void Map_Failure_Does_Not_Execute_Action()
+        {
+            // arrange
+            var exception = new Exception("my exception");
+            var testObject = Exceptional<int>.Failure(exception);
+
+            // act
+            var result = testObject.Map(x => x.ToString());
+
+            // assert
+            Assert.IsNotType<string>(result.Value);
+        }
+
+        [Fact]
+        public void Then_Throw_Exception_Null_Parameter()
+        {
+            // arrange
+            var testObject = Exceptional<string>.Success("my value");
+
+            // act, assert
+            var result = Assert.Throws<ArgumentNullException>(() => testObject.Then<string>(null));
+            Assert.Equal("function", result.ParamName);
+        }
+
+        [Fact]
+        public void Then_Success_Executes_Action()
+        {
+            // arrange
+            var testResult = string.Empty;
+            var testObject = Exceptional<int>.Success(10);
+
+            // act
+            var result = testObject
+                .Then(x => Exceptional<string>.Failure(new Exception()));
+
+            // assert
+            Assert.False(result.IsSuccess);
+        }
+
+        [Fact]
+        public void Then_Failure_Does_Not_Execute_Action()
+        {
+            // arrange
+            var testResult = string.Empty;
+            var testObject = Exceptional<int>.Failure(new Exception());
+
+            // act
+            var result = testObject
+                .Then(x => Exceptional<string>.Success("success!!"));
+
+            // assert
+            Assert.False(result.IsSuccess);
         }
     }
 }

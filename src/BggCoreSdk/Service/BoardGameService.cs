@@ -82,7 +82,7 @@ namespace BggCoreSdk.Service
         }
 
         /// <summary>
-        /// Convertes the board game Dto to a model.
+        /// Convert's the board game Dto to a model.
         /// </summary>
         /// <param name="list">The list of Dto object.</param>
         /// <returns>A list of models.</returns>

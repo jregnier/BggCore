@@ -1,3 +1,7 @@
+#tool "nuget:?package=OpenCover"
+#tool nuget:?package=Codecov
+#addin nuget:?package=Cake.Codecov
+
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
@@ -26,7 +30,8 @@ var buildTask = Task("BuildSolution")
         new DotNetCoreBuildSettings()
         {
             Configuration = configuration,
-            NoRestore = true
+            NoRestore = true,
+            ArgumentCustomization = arg => arg.AppendSwitch("/p:DebugType","=","Full")
         });
 });
 
@@ -36,13 +41,26 @@ var unitTestsTask = Task("RunUnitTests")
 {
     Information("Running xunit tests");
 
-    DotNetCoreTest(
-        "./src/BggCoreSdk.UnitTests/BggCoreSdk.UnitTests.csproj",   
-        new DotNetCoreTestSettings()
-        {
-            Configuration = configuration,
-            NoBuild = true
-        });
+    OpenCover(tool => {
+        tool.DotNetCoreTest(
+            "./src/BggCoreSdk.UnitTests/BggCoreSdk.UnitTests.csproj",   
+            new DotNetCoreTestSettings()
+            {
+                Configuration = configuration,
+                NoBuild = true
+            });
+        },
+        new FilePath("./OpenCoverResults.xml"),
+        new OpenCoverSettings() 
+        { 
+            SkipAutoProps = true,
+            Register = "user",
+            OldStyle = true 
+        }
+        .WithFilter("+[BggCoreSdk]*")
+        .WithFilter("-[BggCoreSdk.UnitTests]*"));
+
+    Codecov("./OpenCoverResults.xml", "6f30231e-7bab-4c5f-b705-a1729f1badfd");
 });
 
 Task("Default")
