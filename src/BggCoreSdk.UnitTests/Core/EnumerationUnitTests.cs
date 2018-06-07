@@ -88,7 +88,7 @@ namespace BggCoreSdk.UnitTests.Core
             Assert.Equal(OPTION1, result.Name);
         }
 
-                [Fact]
+        [Fact]
         public void FromString_ReturnsNull()
         {
             // arrange, act
@@ -98,7 +98,7 @@ namespace BggCoreSdk.UnitTests.Core
             Assert.Null(result);
         }
 
-                [Fact]
+        [Fact]
         public void FromValue_Success()
         {
             // arrange
@@ -112,7 +112,7 @@ namespace BggCoreSdk.UnitTests.Core
             Assert.Equal(OPTION1, result.Value);
         }
 
-                [Fact]
+        [Fact]
         public void FromValue_ReturnsNull()
         {
             // arrange, act
@@ -120,6 +120,26 @@ namespace BggCoreSdk.UnitTests.Core
 
             // assert
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void GetHashCode_Returns_Value_HashCode()
+        {
+            // arrange, act
+            var result = EnumerationTestObject.Option1.GetHashCode();
+
+            // assert
+            Assert.Equal(EnumerationTestObject.Option1.Value.GetHashCode(), result);
+        }
+
+                [Fact]
+        public void ToString_Returns_Name()
+        {
+            // arrange, act
+            var result = EnumerationTestObject.Option1.ToString();
+
+            // assert
+            Assert.Equal(EnumerationTestObject.Option1.Name, result);
         }
     }
 }

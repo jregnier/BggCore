@@ -61,6 +61,20 @@ namespace BggCoreSdk.UnitTests.Core
         }
 
         [Fact]
+        public void IfFailure_Does_Not_Execute_Action()
+        {
+            // arrange
+            var testResult = 0;
+            var testObject = Exceptional<string>.Success("myValue");
+
+            // act
+            testObject.IfFailure(ex => testResult = 10);
+
+            // assert
+            Assert.Equal(0, testResult);
+        }
+
+        [Fact]
         public void IfSuccess_Throw_Exception_Null_Parameter()
         {
             // arrange
@@ -84,6 +98,20 @@ namespace BggCoreSdk.UnitTests.Core
 
             // assert
             Assert.Equal(EXPECTED_RESULT, testResult);
+        }
+
+        [Fact]
+        public void IfSuccess_Does_Not_Executes_Action()
+        {
+            // arrange
+            var testResult = 0;
+            var testObject = Exceptional<string>.Failure(new Exception());
+
+            // act
+            testObject.IfSuccess(ex => testResult = 10);
+
+            // assert
+            Assert.Equal(0, testResult);
         }
 
         [Fact]

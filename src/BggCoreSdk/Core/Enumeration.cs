@@ -49,12 +49,10 @@ namespace BggCoreSdk.Core
             {
                 var instance = new T();
                 var locatedValue = info.GetValue(instance) as T;
-                if (locatedValue == null)
+                if (locatedValue != null)
                 {
-                    continue;
-                }
-
-                yield return locatedValue;
+                    yield return locatedValue;
+                }                
             }
         }
 

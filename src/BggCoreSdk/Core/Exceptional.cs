@@ -53,7 +53,6 @@ namespace BggCoreSdk.Core
         /// Initializes a new instance of the <see cref="Exceptional{T}"/> structure in a success state.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <param name="pagingInfo">The paging information.</param>
         /// <returns>A <see cref="Exceptional{T}"/> with the given value.</returns>
         public static Exceptional<T> Success(T value)
         {
