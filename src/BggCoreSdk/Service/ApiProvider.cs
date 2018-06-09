@@ -42,6 +42,18 @@ namespace BggCoreSdk.Service
         }
 
         /// < inheritdoc />
+        public Uri BuildUri(ApiEndPoint apiEndPoint, string parameterValue)
+        {
+            if (string.IsNullOrWhiteSpace(parameterValue))
+            {
+                throw new ArgumentNullException("parameterValue");
+            }
+
+            return new Uri(
+                new Uri(BASE_URL), string.Join("/", apiEndPoint.Name, parameterValue));
+        }
+
+        /// < inheritdoc />
         public string GetQueryPropertyName<T>(string propertyName)
         {
             if (string.IsNullOrEmpty(propertyName))
@@ -61,18 +73,6 @@ namespace BggCoreSdk.Service
                 .SingleOrDefault(x => x is QueryPropertyAttribute) as QueryPropertyAttribute;
 
             return attribute?.PropertyName;
-        }
-
-        /// < inheritdoc />
-        public Uri BuildUri(ApiEndPoint apiEndPoint, string parameterValue)
-        {
-            if (string.IsNullOrWhiteSpace(parameterValue))
-            {
-                throw new ArgumentNullException("parameterValue");
-            }
-
-            return new Uri(
-                new Uri(BASE_URL), string.Join("/", apiEndPoint.Name, parameterValue));
         }
 
         /// < inheritdoc />
