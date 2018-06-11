@@ -5,7 +5,7 @@ namespace BggCoreSdk.Model
     /// <summary>
     /// Factory for creating models.
     /// </summary>
-    internal interface IModelFactory
+    public interface IModelFactory
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BoardGameSearch" /> class

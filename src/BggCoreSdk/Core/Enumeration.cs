@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace BggCoreSdk.Core
 {
-    internal abstract class Enumeration : IComparable
+    public abstract class Enumeration : IComparable
     {
         protected Enumeration()
         {

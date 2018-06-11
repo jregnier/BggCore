@@ -14,7 +14,6 @@ namespace BggCoreSdk.Service
     public class BoardGameService : IBoardGameService
     {
         private readonly IApiProvider _apiProvider;
-        private readonly ApiEndPoint _endPoint;
         private NameValueCollection _whereQueries;
         private readonly IModelFactory _modelFactory;
 
@@ -23,7 +22,6 @@ namespace BggCoreSdk.Service
             IModelFactory modelFactory)
         {
             _apiProvider = apiProvider;
-            _endPoint = ApiEndPoint.BoardGame;
             _modelFactory = modelFactory;
 
             _whereQueries = new NameValueCollection();
@@ -41,13 +39,20 @@ namespace BggCoreSdk.Service
 
             return new BoardGameService(provider, modelFactory);
         }
+        
+        public static IBoardGameService Create(
+            IApiProvider apiProvider,
+            IModelFactory modelFactory)
+        {
+            return new BoardGameService(apiProvider, modelFactory);
+        }
 
         /// <inheritdocs />
         public async Task<Exceptional<IList<BoardGameSearch>>> SearchAsync()
         {
             try
             {
-                var url = _apiProvider.BuildUri(_endPoint, _whereQueries);
+                var url = _apiProvider.BuildUri(ApiEndPoint.Search, _whereQueries);
                 var rootList = await _apiProvider
                     .CallWebServiceGetAsync<BoardGameSearchListDto>(url)
                     .ConfigureAwait(false);

@@ -9,7 +9,7 @@ namespace BggCoreSdk.Service
     /// <summary>
     /// Used to encapsulate the functionality of the given service.
     /// </summary>
-    internal interface IApiProvider
+    public interface IApiProvider
     {
         /// <summary>
         /// Builds the URL.

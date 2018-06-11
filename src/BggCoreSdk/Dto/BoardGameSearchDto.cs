@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace BggCoreSdk.Dto
 {
-    internal class BoardGameSearchDto
+    public class BoardGameSearchDto
     {
         [XmlAttribute("objectid")]
         public int Id { get; set; }

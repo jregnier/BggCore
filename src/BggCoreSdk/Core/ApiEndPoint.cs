@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace BggCoreSdk.Core
 {
-    internal sealed class ApiEndPoint : Enumeration
+    public sealed class ApiEndPoint : Enumeration
     {
         public static ApiEndPoint Search { get; } = new ApiEndPoint(0, "search");
         public static ApiEndPoint BoardGame { get; } = new ApiEndPoint(1, "boardgame");

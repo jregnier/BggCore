@@ -1,6 +1,6 @@
 namespace BggCoreSdk.Dto
 {
-    internal interface IBggResponse
+    public interface IBggResponse
     {        
     }
 }
