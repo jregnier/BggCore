@@ -26,7 +26,7 @@ namespace BggCoreSdk.UnitTests.Service
         public void BuildUri_With_Paramters()
         {
             // arrange
-            const string EXPECTED_URL = "http://www.boardgamegeek.com/search?property1=value1&property2=value2&property3=value3";
+            const string EXPECTED_URL = "http://www.boardgamegeek.com/xmlapi/search?property1=value1&property2=value2&property3=value3";
             var adapterMock = new Mock<IBggApiServiceAdapter>(MockBehavior.Strict);
             var provider = new ApiProvider(adapterMock.Object);
 
@@ -48,7 +48,7 @@ namespace BggCoreSdk.UnitTests.Service
         public void BuildUri_No_Paramters()
         {
             // arrange
-            const string EXPECTED_URL = "http://www.boardgamegeek.com/search";
+            const string EXPECTED_URL = "http://www.boardgamegeek.com/xmlapi/search";
             var adapterMock = new Mock<IBggApiServiceAdapter>(MockBehavior.Strict);
             var provider = new ApiProvider(adapterMock.Object);
 

@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace BggCoreSdk.Dto
 {
-    internal class BoardGameSearchListDto : IBggResponse
+    [XmlRoot(Namespace = "", ElementName = "boardgames")]
+    public class BoardGameSearchListDto : IBggResponse
     {
+        [XmlElement("boardgame")]
         public List<BoardGameSearchDto> BoardGames { get; set; }
     }
 }

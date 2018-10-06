@@ -52,13 +52,13 @@ namespace BggCoreSdk.UnitTests.Service
                     new BoardGameSearchDto()
                     {
                         Id = 1,
-                        Name = "name1",
+                        Name = new BoardGameNameDto { Value = "name1" },
                         YearPublished = 1999
                     },
                     new BoardGameSearchDto()
                     {
                         Id = 2,
-                        Name = "name2",
+                        Name = new BoardGameNameDto() { Value = "name2" },
                         YearPublished = 1999
                     }
                 }

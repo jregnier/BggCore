@@ -13,7 +13,7 @@ namespace BggCoreSdk.UnitTests.Model
             var dtoObject = new BoardGameSearchDto()
             {
                 Id = 1,
-                Name = "fake name",
+                Name = new BoardGameNameDto() { Value = "fake name" },
                 YearPublished = 1990
             };
             var factory = new ModelFactory();
@@ -24,7 +24,7 @@ namespace BggCoreSdk.UnitTests.Model
             // assert
             Assert.NotNull(result);
             Assert.Equal(dtoObject.Id, result.Id);
-            Assert.Equal(dtoObject.Name, result.Name);
+            Assert.Equal(dtoObject.Name.Value, result.Name.Value);
             Assert.Equal(dtoObject.YearPublished, result.YearPublished);
         }
 

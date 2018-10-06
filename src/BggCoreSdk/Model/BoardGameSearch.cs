@@ -10,7 +10,7 @@ namespace BggCoreSdk.Model
 
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public BoardGameName Name { get; set; }
 
         public int YearPublished { get; set; }
     }

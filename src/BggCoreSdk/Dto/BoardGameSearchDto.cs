@@ -8,7 +8,7 @@ namespace BggCoreSdk.Dto
         public int Id { get; set; }
 
         [XmlElement("name")]
-        public string Name { get; set; }
+        public BoardGameNameDto Name { get; set; }
 
         [XmlElement("yearpublished")]
         public int YearPublished { get; set; }

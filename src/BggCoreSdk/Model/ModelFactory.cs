@@ -16,7 +16,7 @@ namespace BggCoreSdk.Model
             return new BoardGameSearch()
             {
                 Id = dtoObject.Id,
-                Name = dtoObject.Name,
+                Name = new BoardGameName() { Value = dtoObject.Name.Value, IsPrimary = dtoObject.Name.IsPrimary },
                 YearPublished = dtoObject.YearPublished
             };
         }

@@ -33,7 +33,7 @@ namespace BggCoreSdk.Service
                 throw new ArgumentNullException("parameters");
             }
 
-            var builder = new UriBuilder(new Uri(new Uri(BASE_URL), apiEndPoint.Name));
+            var builder = new UriBuilder($"{BASE_URL}/{apiEndPoint.Name}");
             var query = HttpUtility.ParseQueryString(builder.Query);
             query.Add(parameters);
             builder.Query = query.ToString();
