@@ -14,6 +14,13 @@ namespace BggCoreSdk.Service
         /// Performs a search for board games based on the given input.
         /// </summary>
         /// <returns>The collection of results.</returns>
-         Task<Exceptional<IList<BoardGameSearch>>> SearchAsync();
+        Task<Exceptional<IList<BoardGameSearch>>> SearchAsync();
+
+        /// <summary>
+        /// Gets the boards games with the given identifiers.
+        /// </summary>
+        /// <param name="ids">The list of identifiers.</param>
+        /// <returns>The games with the given identifiers.</returns>
+        Task<Exceptional<IList<BoardGame>>> FindAsync(IList<string> ids);
     }
 }

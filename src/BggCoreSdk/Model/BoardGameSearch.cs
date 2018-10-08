@@ -13,5 +13,10 @@ namespace BggCoreSdk.Model
         public BoardGameName Name { get; set; }
 
         public int YearPublished { get; set; }
+
+        public override string ToString()
+        {
+            return Name?.Value;
+        }
     }
 }

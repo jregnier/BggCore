@@ -78,7 +78,7 @@ namespace BggCoreSdk.UnitTests.Service
         {
             // arrange
             const string PARAMETER_VALUE = "value1";
-            const string EXPECTED_URL = "http://www.boardgamegeek.com/search/value1";
+            const string EXPECTED_URL = "http://www.boardgamegeek.com/xmlapi/search/value1";
             var adapterMock = new Mock<IBggApiServiceAdapter>(MockBehavior.Strict);
             var provider = new ApiProvider(adapterMock.Object);
 
