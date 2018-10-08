@@ -39,7 +39,7 @@ namespace BggCoreSdk.Service
 
             return new BoardGameService(provider, modelFactory);
         }
-        
+
         public static IBoardGameService Create(
             IApiProvider apiProvider,
             IModelFactory modelFactory)
@@ -54,14 +54,40 @@ namespace BggCoreSdk.Service
             {
                 var url = _apiProvider.BuildUri(ApiEndPoint.Search, _whereQueries);
                 var rootList = await _apiProvider
-                    .CallWebServiceGetAsync<BoardGameSearchListDto>(url)
+                    .CallWebServiceGetAsync<BoardGameListDto>(url)
                     .ConfigureAwait(false);
 
-                return Exceptional<IList<BoardGameSearch>>.Success(MapBoardGameSearch(rootList));
+                var result = rootList?.BoardGames
+                    .Select(x => _modelFactory.CreateBoardGameSearch(x))
+                    .ToList();
+
+                return Exceptional<IList<BoardGameSearch>>.Success(result);
             }
             catch (Exception ex)
             {
                 return Exceptional<IList<BoardGameSearch>>.Failure(ex);
+            }
+        }
+
+        /// <inheritdocs />
+        public async Task<Exceptional<IList<BoardGame>>> FindAsync(IList<string> ids)
+        {
+            try
+            {
+                var url = _apiProvider.BuildUri(ApiEndPoint.BoardGame, string.Join(",", ids));
+                var rootList = await _apiProvider
+                    .CallWebServiceGetAsync<BoardGameListDto>(url)
+                    .ConfigureAwait(false);
+
+                var result = rootList?.BoardGames
+                    .Select(x => _modelFactory.CreateBoardGame(x))
+                    .ToList();
+
+                return Exceptional<IList<BoardGame>>.Success(result);
+            }
+            catch (Exception ex)
+            {
+                return Exceptional<IList<BoardGame>>.Failure(ex);
             }
         }
 
@@ -84,23 +110,6 @@ namespace BggCoreSdk.Service
             _whereQueries[queryName] = Convert.ToString(value);
 
             return this;
-        }
-
-        /// <summary>
-        /// Convert's the board game Dto to a model.
-        /// </summary>
-        /// <param name="list">The list of Dto object.</param>
-        /// <returns>A list of models.</returns>
-        private IList<BoardGameSearch> MapBoardGameSearch(BoardGameSearchListDto list)
-        {
-            if (list == null)
-            {
-                return new List<BoardGameSearch>();
-            }
-
-            return list.BoardGames
-                .Select(x => _modelFactory.Create(x))
-                .ToList();
         }
     }
 }

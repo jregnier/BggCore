@@ -4,9 +4,9 @@ using System.Xml.Serialization;
 namespace BggCoreSdk.Dto
 {
     [XmlRoot(Namespace = "", ElementName = "boardgames")]
-    public class BoardGameSearchListDto : IBggResponse
+    public class BoardGameListDto : IBggResponse
     {
         [XmlElement("boardgame")]
-        public List<BoardGameSearchDto> BoardGames { get; set; }
+        public List<BoardGameDto> BoardGames { get; set; }
     }
 }

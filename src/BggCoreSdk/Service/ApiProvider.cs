@@ -50,7 +50,7 @@ namespace BggCoreSdk.Service
             }
 
             return new Uri(
-                new Uri(BASE_URL), string.Join("/", apiEndPoint.Name, parameterValue));
+                $"{BASE_URL}/{string.Join("/", apiEndPoint.Name, parameterValue)}");
         }
 
         /// < inheritdoc />

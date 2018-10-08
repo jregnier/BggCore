@@ -17,7 +17,7 @@ namespace BggCoreSdk.UnitTests.Core
             // act, assert
             await Assert.ThrowsAsync<ArgumentNullException>(
                 "requestUri",
-                async () => await service.WebGetAsync<BoardGameSearchListDto>(null));
+                async () => await service.WebGetAsync<BoardGameListDto>(null));
         }
     }
 }

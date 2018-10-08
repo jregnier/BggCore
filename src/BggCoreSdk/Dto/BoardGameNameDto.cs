@@ -8,7 +8,10 @@ namespace BggCoreSdk.Dto
         public string Value { get; set; }
 
         [XmlAttribute("primary")]
-        public bool IsPrimary { get; set; }
+        public string IsPrimary { get; set; }
+
+        [XmlAttribute("sortindex")]
+        public string SortIndex { get; set; }
 
         public override string ToString()
         {
