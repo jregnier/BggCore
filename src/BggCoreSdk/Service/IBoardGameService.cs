@@ -6,16 +6,10 @@ using BggCoreSdk.Model;
 namespace BggCoreSdk.Service
 {
     /// <summary>
-    /// Service for dealing with the board game end point.
+    /// Service for gettting information on a boardgame.
     /// </summary>
-    public interface IBoardGameService : IBggQueryable<IBoardGameService, BoardGameSearchQueryParameters>
+    public interface IBoardGameService : IBggQueryable<IBoardGameService, BoardGameQueryParameters>
     {
-        /// <summary>
-        /// Performs a search for board games based on the given input.
-        /// </summary>
-        /// <returns>The collection of results.</returns>
-        Task<Exceptional<IList<BoardGameSearch>>> SearchAsync();
-
         /// <summary>
         /// Gets the boards games with the given identifiers.
         /// </summary>

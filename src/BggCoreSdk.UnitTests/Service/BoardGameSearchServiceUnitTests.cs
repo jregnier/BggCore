@@ -11,20 +11,10 @@ using Xunit;
 
 namespace BggCoreSdk.UnitTests.Service
 {
-    public class BoardGameServiceUnitTests
+    public class BoardGameSearchServiceUnitTests
     {
         [Fact]
-        public void Create_Not_Null()
-        {
-            // arrange, act
-            var service = BoardGameService.Create();
-
-            // assert
-            Assert.NotNull(service);
-        }
-
-        [Fact]
-        public async Task FindAsync_Failure()
+        public async Task SearchAsync_Failure()
         {
             // arrange
             var apiProviderMock = new Mock<IApiProvider>(MockBehavior.Strict);
@@ -32,40 +22,36 @@ namespace BggCoreSdk.UnitTests.Service
                 .Setup(x => x.BuildUri(ApiEndPoint.Search, It.IsAny<NameValueCollection>()))
                 .Throws(new Exception("my error"));
             var modelFactory = new Mock<IModelFactory>(MockBehavior.Strict);
-            var service = BoardGameService.Create(apiProviderMock.Object, modelFactory.Object);
+            var service = BoardGameSearchService.Create(apiProviderMock.Object, modelFactory.Object);
 
             // act
-            var result = await service.FindAsync(new[] { "5", "10" });
+            var result = await service.SearchAsync();
 
             // assert
             Assert.False(result.IsSuccess);
         }
 
         [Fact]
-        public async Task FindAsync_Returns_results()
+        public async Task SearchAsync_Returns_results()
         {
             // arrange
             var boardGamesList = new BoardGameListDto()
             {
-                BoardGames = DataProvider.GetBoardGameResults()
+                BoardGames = DataProvider.GetBoardGameSearchResults()
             };
 
             var apiProviderMock = new Mock<IApiProvider>(MockBehavior.Strict);
             apiProviderMock
-                .Setup(x => x.BuildUri(ApiEndPoint.BoardGame, "100", It.IsAny<NameValueCollection>()))
+                .Setup(x => x.BuildUri(ApiEndPoint.Search, It.IsAny<NameValueCollection>()))
                 .Returns(new Uri("http://fake/url"));
             apiProviderMock
                 .Setup(x => x.CallWebServiceGetAsync<BoardGameListDto>(It.IsAny<Uri>()))
                 .ReturnsAsync(boardGamesList);
-            apiProviderMock
-                .Setup(x => x.GetQueryPropertyName<BoardGameQueryParameters>("Comments"))
-                .Returns("comments");
             var modelFactory = new ModelFactory();
-            var service = BoardGameService.Create(apiProviderMock.Object, modelFactory);
-            service.Where(x => x.Comments, true);
+            var service = BoardGameSearchService.Create(apiProviderMock.Object, modelFactory);
 
             // act
-            var result = await service.FindAsync(new[] { "100" });
+            var result = await service.SearchAsync();
 
             // assert
             Assert.True(result.IsSuccess);
@@ -78,11 +64,24 @@ namespace BggCoreSdk.UnitTests.Service
             // arrange
             var apiProviderMock = new Mock<IApiProvider>(MockBehavior.Strict);
             var modelFactory = new Mock<IModelFactory>(MockBehavior.Strict);
-            var service = BoardGameService.Create(apiProviderMock.Object, modelFactory.Object);
+            var service = BoardGameSearchService.Create(apiProviderMock.Object, modelFactory.Object);
 
             // act, assert
             var result = Assert.Throws<ArgumentNullException>(() => service.Where(null, "value1"));
             Assert.Equal("property", result.ParamName);
+        }
+
+        [Fact]
+        public void Where_Null_Value_Throws()
+        {
+            // arrange
+            var apiProviderMock = new Mock<IApiProvider>(MockBehavior.Strict);
+            var modelFactory = new Mock<IModelFactory>(MockBehavior.Strict);
+            var service = BoardGameSearchService.Create(apiProviderMock.Object, modelFactory.Object);
+
+            // act, assert
+            var result = Assert.Throws<ArgumentNullException>(() => service.Where(x => x.Search, null));
+            Assert.Equal("value", result.ParamName);
         }
 
         [Fact]
@@ -91,13 +90,13 @@ namespace BggCoreSdk.UnitTests.Service
             // arrange
             var apiProviderMock = new Mock<IApiProvider>(MockBehavior.Strict);
             apiProviderMock
-                .Setup(x => x.GetQueryPropertyName<BoardGameQueryParameters>(It.IsAny<string>()))
-                .Returns("comments");
+                .Setup(x => x.GetQueryPropertyName<BoardGameSearchQueryParameters>(It.IsAny<string>()))
+                .Returns("search");
             var modelFactory = new Mock<IModelFactory>(MockBehavior.Strict);
-            var service = BoardGameService.Create(apiProviderMock.Object, modelFactory.Object);
+            var service = BoardGameSearchService.Create(apiProviderMock.Object, modelFactory.Object);
 
             // act
-            var result = service.Where(x => x.Comments, true);
+            var result = service.Where(x => x.Search, "value1");
 
             Assert.NotNull(result);
             Assert.Equal(service, result);
