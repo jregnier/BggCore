@@ -72,5 +72,11 @@ namespace BggCoreSdk.Dto
 
         [XmlElement("poll")]
         public BoardGamePollDto[] Polls { get; set; }
+
+        [XmlElement("comment")]
+        public BoardGameCommentDto[] Comments { get; set; }
+
+        [XmlElement("statistics")]
+        public BoardGameStatisticsDto[] Statistics { get; set; }
     }
 }

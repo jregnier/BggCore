@@ -54,5 +54,9 @@ namespace BggCoreSdk.Model
         public List<ValueIdentifier> VideogameBg { get; set; }
 
         public List<BoardGamePoll> Polls { get; set; }
+
+        public List<BoardGameComment> Comments { get; set; }
+
+        public List<BoardGameStatistics> Statistics { get; set; }
     }
 }

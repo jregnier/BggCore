@@ -14,17 +14,27 @@ namespace BggCoreSdk.Service
         /// <summary>
         /// Builds the URL.
         /// </summary>
-        /// <param name="parameters">The parameters.</param>
         /// <param name="apiEndPoint">The end point of the API.</param>
+        /// <param name="parameters">The parameters.</param>        
         /// <returns></returns>
         Uri BuildUri(ApiEndPoint apiEndPoint, NameValueCollection parameters);
 
         /// <summary>
         /// Builds the URL to call the web service.
         /// </summary>
+        /// <param name="apiEndPoint">The end point of the API.</param>
         /// <param name="parameterValue">The parameter value to add.</param>
         /// <returns>The URL to make the call with.</returns>
         Uri BuildUri(ApiEndPoint apiEndPoint, string parameterValue);
+
+        /// <summary>
+        /// Builds the URL.
+        /// </summary>
+        /// <param name="apiEndPoint">The end point of the API.</param>
+        /// <param name="parameterValue">The parameter value to add.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns></returns>
+        Uri BuildUri(ApiEndPoint apiEndPoint, string parameterValue, NameValueCollection parameters);        
 
         /// <summary>
         /// Gets the property name to use in the API call.

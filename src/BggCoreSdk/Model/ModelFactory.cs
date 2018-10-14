@@ -21,8 +21,8 @@ namespace BggCoreSdk.Model
             return new BoardGameSearch()
             {
                 Id = identifier,
-                Name = new BoardGameName() 
-                { 
+                Name = new BoardGameName()
+                {
                     Value = dtoObject.Names.FirstOrDefault()?.Value,
                     IsPrimary = dtoObject.Names.FirstOrDefault()?.IsPrimary == bool.TrueString
                 },
@@ -30,7 +30,7 @@ namespace BggCoreSdk.Model
             };
         }
 
-                /// <inheritdoc />
+        /// <inheritdoc />
         public BoardGame CreateBoardGame(BoardGameDto dtoObject)
         {
             if (dtoObject == null)
@@ -117,6 +117,40 @@ namespace BggCoreSdk.Model
                         Value = r.Value,
                         NumVotes = ToInt(r.NumVotes)
                     }).ToList()
+                }).ToList(),
+                Comments = dtoObject.Comments?.Select(x => new BoardGameComment()
+                {
+                    Value = x.Value,
+                    UserName = x.UserName,
+                    Rating = x.Rating
+                }).ToList(),
+                Statistics = dtoObject.Statistics?.Select(x => new BoardGameStatistics()
+                {
+                    Page = ToInt(x.Page),
+                    Ratings = new BoardGameStatisticsRatings()
+                    {
+                        UsersRated = ToFloat(x.Ratings?.UsersRated),
+                        Average = ToFloat(x.Ratings.Average),
+                        BayesAverage = ToFloat(x.Ratings.BayesAverage),
+                        Ranks = x.Ratings?.Ranks.Select(r => new BoardGameStatisticsRatingsRank()
+                        {
+                            Type = r.Type,
+                            Id = ToInt(r.Id),
+                            Name = r.Name,
+                            FriendlyName = r.FriendlyName,
+                            Value = ToInt(r.Value),
+                            BayesAverage = ToFloat(r.BayesAverage)
+                        }).ToList(),
+                        StdDev = ToFloat(x.Ratings?.StdDev),
+                        Median = ToInt(x.Ratings?.Median),
+                        Owned = ToInt(x.Ratings?.Owned),
+                        Trading = ToInt(x.Ratings?.Trading),
+                        Wanting = ToInt(x.Ratings?.Wanting),
+                        Wishing = ToInt(x.Ratings?.Wishing),
+                        NumComments = ToInt(x.Ratings?.NumComments),
+                        NumWeights = ToInt(x.Ratings?.NumWeights),
+                        AverageWeight = ToFloat(x.Ratings?.AverageWeight)
+                    }
                 }).ToList()
             };
         }
@@ -124,6 +158,16 @@ namespace BggCoreSdk.Model
         private int ToInt(string value)
         {
             if (int.TryParse(value, out int v))
+            {
+                return v;
+            }
+
+            return 0;
+        }
+
+        private float ToFloat(string value)
+        {
+            if (float.TryParse(value, out float v))
             {
                 return v;
             }

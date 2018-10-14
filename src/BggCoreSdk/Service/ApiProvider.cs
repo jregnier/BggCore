@@ -53,6 +53,26 @@ namespace BggCoreSdk.Service
                 $"{BASE_URL}/{string.Join("/", apiEndPoint.Name, parameterValue)}");
         }
 
+        public Uri BuildUri(ApiEndPoint apiEndPoint, string parameterValue, NameValueCollection parameters)
+        {
+            if (string.IsNullOrWhiteSpace(parameterValue))
+            {
+                throw new ArgumentNullException("parameterValue");
+            }
+
+            if (parameters == null)
+            {
+                throw new ArgumentNullException("parameters");
+            }
+
+            var builder = new UriBuilder($"{BASE_URL}/{string.Join("/", apiEndPoint.Name, parameterValue)}");
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query.Add(parameters);
+            builder.Query = query.ToString();
+
+            return builder.Uri;
+        }
+
         /// < inheritdoc />
         public string GetQueryPropertyName<T>(string propertyName)
         {
