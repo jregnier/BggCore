@@ -60,7 +60,7 @@ var unitTestsTask = Task("RunUnitTests")
         .WithFilter("+[BggCoreSdk]*")
         .WithFilter("-[BggCoreSdk.UnitTests]*"));
 
-    Codecov("./OpenCoverResults.xml", "f7c9d882-99e0-4a44-a651-16ed7cee7bc4");
+    Codecov("./OpenCoverResults.xml", "6f30231e-7bab-4c5f-b705-a1729f1badfd");
 });
 
 Task("Default")
