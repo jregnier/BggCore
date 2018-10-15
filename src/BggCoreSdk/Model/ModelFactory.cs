@@ -15,18 +15,15 @@ namespace BggCoreSdk.Model
                 return null;
             }
 
-            int.TryParse(dtoObject.Id, out var identifier);
-            int.TryParse(dtoObject.YearPublished, out var yearPublished);
-
             return new BoardGameSearch()
             {
-                Id = identifier,
+                Id = ToInt(dtoObject.Id),
                 Name = new BoardGameName()
                 {
                     Value = dtoObject.Names.FirstOrDefault()?.Value,
                     IsPrimary = dtoObject.Names.FirstOrDefault()?.IsPrimary == bool.TrueString
                 },
-                YearPublished = yearPublished
+                YearPublished = ToInt(dtoObject.YearPublished)
             };
         }
 

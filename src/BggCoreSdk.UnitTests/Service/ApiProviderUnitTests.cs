@@ -90,6 +90,44 @@ namespace BggCoreSdk.UnitTests.Service
         }
 
         [Fact]
+        public void BuildUri_Null_Parameters_And_ParameterValue_Throws()
+        {
+            // arrange
+            var adapterMock = new Mock<IBggApiServiceAdapter>(MockBehavior.Strict);
+            var provider = new ApiProvider(adapterMock.Object);
+
+            // act, assert
+            var result1 = Assert.Throws<ArgumentNullException>(() => provider.BuildUri(ApiEndPoint.Search, null, new NameValueCollection()));
+            var result2 = Assert.Throws<ArgumentNullException>(() => provider.BuildUri(ApiEndPoint.Search, "fake parameter", null));
+            Assert.Equal("parameterValue", result1.ParamName);
+            Assert.Equal("parameters", result2.ParamName);
+        }
+
+        [Fact]
+        public void BuildUri_With_ParamterValue_And_Parameters()
+        {
+            // arrange
+            const string PARAMETER_VALUE = "value1";
+            const string EXPECTED_URL = "http://www.boardgamegeek.com/xmlapi/search/value1?property1=value1&property2=value2&property3=value3";
+
+            var parametersCollection = new NameValueCollection()
+            {
+                { "property1", "value1" },
+                { "property2", "value2" },
+                { "property3", "value3" }
+            };
+
+            var adapterMock = new Mock<IBggApiServiceAdapter>(MockBehavior.Strict);
+            var provider = new ApiProvider(adapterMock.Object);
+
+            // act
+            var result = provider.BuildUri(ApiEndPoint.Search, PARAMETER_VALUE, parametersCollection);
+
+            // assert
+            Assert.Equal(EXPECTED_URL, result.ToString());
+        }
+
+        [Fact]
         public void GetQueryPropertyName_Null_PropertyName_Throws()
         {
             // arrange
