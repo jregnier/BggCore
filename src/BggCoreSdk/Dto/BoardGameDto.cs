@@ -58,6 +58,9 @@ namespace BggCoreSdk.Dto
         [XmlElement("boardgameversion")]
         public ValueIdentifierDto[] BoardGameVersions { get; set; }
 
+        [XmlElement("boardgameimplementation ")]
+        public ValueIdentifierDto[] BoardGameImplementation  { get; set; }
+
         [XmlElement("boardgamecategory")]
         public ValueIdentifierDto[] BoardGameCategories { get; set; }
 

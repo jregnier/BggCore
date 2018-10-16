@@ -64,11 +64,31 @@ namespace BggCoreSdk.Model
                     Id = ToInt(x.Id),
                     Value = x.Value
                 }).ToList(),
+                BoardGameHonor = dtoObject.BoardGameHonor?.Select(x => new ValueIdentifier()
+                {
+                    Id = ToInt(x.Id),
+                    Value = x.Value
+                }).ToList(),
+                BoardGameMechanic = dtoObject.BoardGameMechanic?.Select(x => new ValueIdentifier()
+                {
+                    Id = ToInt(x.Id),
+                    Value = x.Value
+                }).ToList(),
+                BoardGamePodCastEpisode = dtoObject.BoardGamePodCastEpisode?.Select(x => new ValueIdentifier()
+                {
+                    Id = ToInt(x.Id),
+                    Value = x.Value
+                }).ToList(),
                 BoardGameVersions = dtoObject.BoardGameVersions?.Select(x => new ValueIdentifier()
                 {
                     Id = ToInt(x.Id),
                     Value = x.Value
                 }).ToList(),
+                BoardGameImplementation = dtoObject.BoardGameImplementation?.Select(x => new ValueIdentifier()
+                {
+                    Id = ToInt(x.Id),
+                    Value = x.Value
+                }).ToList(),                
                 BoardGameCategories = dtoObject.BoardGameCategories?.Select(x => new ValueIdentifier()
                 {
                     Id = ToInt(x.Id),
