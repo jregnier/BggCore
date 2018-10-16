@@ -14,7 +14,7 @@ namespace BggCoreSdk.Model
 
         public int TotalVotes { get; set; }
 
-        public List<BoardGamePollResult> Results { get; set; }
+        public List<BoardGamePollResults> Results { get; set; }
 
         public override string ToString()
         {

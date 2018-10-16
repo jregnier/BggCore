@@ -109,10 +109,14 @@ namespace BggCoreSdk.Model
                     Name = x.Name,
                     Title = x.Title,
                     TotalVotes = ToInt(x.TotalVotes),
-                    Results = x.Results?.Select(r => new BoardGamePollResult()
+                    Results = x.Results?.Select(r => new BoardGamePollResults
                     {
-                        Value = r.Value,
-                        NumVotes = ToInt(r.NumVotes)
+                        NumPlayers = ToInt(r.NumPlayers),
+                        ResultList = r.ResultList.Select(rl => new BoardGamePollResult
+                        {
+                            Value = rl.Value,
+                            NumVotes = ToInt(rl.NumVotes)
+                        }).ToList()
                     }).ToList()
                 }).ToList(),
                 Comments = dtoObject.Comments?.Select(x => new BoardGameComment()

@@ -37,6 +37,12 @@ namespace BggCoreSdk.Model
 
         public List<ValueIdentifier> BoardGamePublishers { get; set; }
 
+        public List<ValueIdentifier> BoardGameHonor { get; set; }
+
+        public List<ValueIdentifier> BoardGameMechanic { get; set; }
+
+        public List<ValueIdentifier> BoardGamePodCastEpisode { get; set; }
+
         public List<ValueIdentifier> BoardGameVersions { get; set; }
 
         public List<ValueIdentifier> BoardGameCategories { get; set; }

@@ -13,8 +13,7 @@ namespace BggCoreSdk.Dto
         [XmlAttribute("totalvotes")]
         public string TotalVotes { get; set; }
 
-        [XmlArray("results")]
-        [XmlArrayItem("result")]
-        public BoardGamePollResultDto[] Results { get; set; }
+        [XmlElement("results")]
+        public BoardGamePollResultsDto[] Results { get; set; }
     }
 }

@@ -46,6 +46,15 @@ namespace BggCoreSdk.Dto
         [XmlElement("boardgamepublisher")]
         public ValueIdentifierDto[] BoardGamePublishers { get; set; }
 
+        [XmlElement("boardgamehonor")]
+        public ValueIdentifierDto[] BoardGameHonor { get; set; }
+
+        [XmlElement("boardgamemechanic")]
+        public ValueIdentifierDto[] BoardGameMechanic { get; set; }
+
+        [XmlElement("boardgamepodcastepisode")]
+        public ValueIdentifierDto[] BoardGamePodCastEpisode { get; set; }
+
         [XmlElement("boardgameversion")]
         public ValueIdentifierDto[] BoardGameVersions { get; set; }
 

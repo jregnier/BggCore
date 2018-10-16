@@ -6,6 +6,8 @@ namespace BggCoreSdk.Model
         {
         }
 
+        public int? Level { get; set; }
+
         public string Value { get; set; }
 
         public int NumVotes { get; set; }

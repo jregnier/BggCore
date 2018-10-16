@@ -105,8 +105,24 @@ namespace BggCoreSdk.UnitTests
                             TotalVotes = "100",
                             Results = new[]
                             {
-                                new BoardGamePollResultDto { Value = "value1", NumVotes = "5" },
-                                new BoardGamePollResultDto { Value = "value2", NumVotes = "10" }
+                                new BoardGamePollResultsDto 
+                                { 
+                                    NumPlayers = "1",
+                                    ResultList = new[]
+                                    {
+                                        new BoardGamePollResultDto { Value = "value1", NumVotes = "5" },
+                                        new BoardGamePollResultDto { Value = "value2", NumVotes = "10" }
+                                    }
+                                },
+                                new BoardGamePollResultsDto
+                                {
+                                    NumPlayers = "2",
+                                    ResultList = new[]
+                                    {
+                                        new BoardGamePollResultDto { Value = "value3", NumVotes = "15" },
+                                        new BoardGamePollResultDto { Value = "value4", NumVotes = "20" }
+                                    }
+                                }
                             }
                         }
                     },
